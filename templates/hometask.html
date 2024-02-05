@@ -1,0 +1,53 @@
+{%  extends 'base.html' %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>ToDo</h1>
+                    <a href="{% url 'todoapp:addtask' %}" class="btn btn-primary">My Add Window</a>
+                    <a href="{% url 'todoapp:cbvhometask' %}" class="btn btn-primary">My CBV AddWindow</a>
+                </div>
+            <div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Task Management</h4>
+            <form method="POST" class="p-3 shadow" >
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class = "form-group">
+                        <input type="Text" class = "form-control" name ="task" placeholder = "Enter your Task Name">
+                    </div>
+                    <div class = "form-group">
+                        <input type="Text" class = "form-control" name ="priority" placeholder = "Enter your Priority">
+                    </div>
+                    <div class = "form-group">
+                        <input type="date" class = "form-control" name ="date" placeholder = "Enter your Date">
+                    </div>
+                    <input class = "btn btn-success" type="Submit" value="Sumit">
+                </div>
+            </form>
+        </div>
+            <div class="col-md-6">
+                <h4> Task to be completed</h4>
+                {% for i in task1 %}
+                <div class="shadow card">
+                    <div class="card-body">
+                        <h5 class ="card-title">{{i.name}}</h5>
+                        <p><b>{{i.priority}}</b></p>
+                        <p><b>{{i.date}}</b></p>
+                        <a class="btn btn-danger" href="{% url 'todoapp:delete' i.id %}">Done</a>
+                        <a class="btn btn-success" href="{% url 'todoapp:update' i.id %}">Update</a>
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+    </div>
+</div>
+{% endblock %}

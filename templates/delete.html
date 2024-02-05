@@ -1,0 +1,8 @@
+{%  extends 'base.html' %}
+{% block body %}
+<form class="roy" method="POST">
+    {% csrf_token %}
+    <h3>This task is done, are you sure ?</h3>
+    <button class = "btn btn-danger" type="submit">Done</button>
+</form>
+{% endblock %}
